@@ -9,7 +9,11 @@ function getPointsFromReceipt(receiptData) {
       }
     
 
-    // 
+    // rule 2: 50 points if the total is a round dollar amount with no cents.
+    const total = parseFloat(receiptData.total);
+    if (total % 1 === 0) {
+        totalPoints += 50;
+    }
       return totalPoints;
 
 }
