@@ -3,9 +3,9 @@ function getPointsFromReceipt(receiptData) {
 
     // rule 1: One point for every alphanumeric character in the retailer name.
     const storeName = receiptData.retailer || ""; 
-    const alphanumericChars = storeName.match(/[a-zA-Z0-9]/g);
-    if (alphanumericChars) {
-        totalPoints += alphanumericChars.length;
+    const alphaNumChars = storeName.match(/[a-zA-Z0-9]/g);
+    if (alphaNumChars) {
+        totalPoints += alphaNumChars.length;
       }
     
 
@@ -33,10 +33,18 @@ function getPointsFromReceipt(receiptData) {
         const price = parseFloat(item.price);              
 
         if (desc.length % 3 === 0) {                        
-            const bonus = Math.ceil(price * 0.2);             
+            const bonus = Math.ceil(price * 0.2); // round up             
             totalPoints += bonus;                             
         }
     });
+
+    // Rule 6: 6 points if the day in the purchase date is odd.
+    const date = receiptData.purchaseDate.split("-");
+    const day = parseInt(date[2]); // gets the "DD" part of date
+    if (day % 2 === 1) {
+        totalPoints += 6;
+    }
+
 
     
     
