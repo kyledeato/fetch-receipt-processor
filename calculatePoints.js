@@ -21,7 +21,7 @@ function getPointsFromReceipt(receiptData) {
       }
 
     // rule 4: 5 points for every two items on the receipt.
-    const itemCount = receiptData.items?.length || 0;
+    const itemCount = (receiptData.items || []).length;
     const itemPairs = Math.floor(itemCount / 2);
     totalPoints += itemPairs * 5;
     
@@ -49,7 +49,6 @@ function getPointsFromReceipt(receiptData) {
     // rule 7: 10 points if the time of purchase is after 2:00pm and before 4:00pm.
     const time = receiptData.purchaseTime.split(":");
     const hour = parseInt(time[0]);
-    const minute = parseInt(time[1]);
     
     // check if hour is 14 or 15 (2pm to before 4pm)
     if (hour >= 14 && hour < 16) {
