@@ -1,5 +1,6 @@
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
+const getPointsFromReceipt = require('./calculatePoints');
 
 const app = express();
 const PORT = 3000;
@@ -36,10 +37,11 @@ app.get('/receipts/:id/points', (req, res) => {
     return res.status(404).json({ error: 'Receipt not found' });
   }
 
-  // points calculator HERE
+  const totalPoints = getPointsFromReceipt(receipt);
+  console.log(`Points calculated. ID: ${id} | Points: ${totalPoints}`);
+  res.json({ points: totalPoints });
 
-  // placeholder points
-  res.json({ points: 0 });
+
 });
 
 // start server
