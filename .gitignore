@@ -1,0 +1,21 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Runtime files
+.env
+.env.local
+
+# OS / IDE files
+.DS_Store
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Docker
+*.tar
